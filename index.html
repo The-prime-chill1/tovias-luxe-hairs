@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>TOVIA'S LUXE HAIRS | Premium Luxury Hair</title>
     <style>
         * {
@@ -14,9 +14,10 @@
         body {
             background-color: #0d0d0d;
             color: #ffffff;
-            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            font-family: 'Poppins', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.5;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, .brand, .nav-link {
@@ -25,7 +26,7 @@
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             margin-bottom: 2rem;
             position: relative;
             display: inline-block;
@@ -70,7 +71,7 @@
             border-radius: 40px;
             cursor: pointer;
             transition: 0.25s ease;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 4vw, 1rem);
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -90,6 +91,7 @@
             font-weight: 500;
             transition: 0.25s;
             cursor: pointer;
+            font-size: clamp(0.9rem, 4vw, 1rem);
         }
         .btn-outline-gold:hover {
             background: #d4af37;
@@ -100,10 +102,15 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(13,13,13,0.9);
+            background: rgba(13,13,13,0.95);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(212,175,55,0.3);
-            padding: 1rem 2rem;
+            padding: 0.8rem 1rem;
+        }
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 1rem 2rem;
+            }
         }
         .nav-container {
             max-width: 1400px;
@@ -114,7 +121,7 @@
             flex-wrap: wrap;
         }
         .brand {
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
             font-weight: 600;
             background: linear-gradient(135deg, #fff 30%, #d4af37 80%);
             -webkit-background-clip: text;
@@ -124,8 +131,13 @@
         }
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             list-style: none;
+        }
+        @media (min-width: 768px) {
+            .nav-links {
+                gap: 2rem;
+            }
         }
         .nav-link {
             text-decoration: none;
@@ -133,6 +145,7 @@
             font-weight: 500;
             transition: 0.2s;
             position: relative;
+            font-size: clamp(0.8rem, 3.5vw, 1rem);
         }
         .nav-link:after {
             content: '';
@@ -156,6 +169,39 @@
             cursor: pointer;
             color: #d4af37;
         }
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+                font-size: 1.5rem;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(13,13,13,0.98);
+                backdrop-filter: blur(20px);
+                padding: 1rem;
+                border-radius: 20px;
+                margin-top: 1rem;
+                gap: 0.8rem;
+                text-align: center;
+                border: 1px solid rgba(212,175,55,0.2);
+            }
+            .nav-links.active {
+                display: flex;
+                animation: slideDown 0.3s ease;
+            }
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
 
         .hero {
             display: flex;
@@ -163,15 +209,23 @@
             align-items: center;
             justify-content: space-between;
             max-width: 1300px;
-            margin: 2rem auto;
-            padding: 2rem 2rem 4rem;
-            gap: 3rem;
+            margin: 1rem auto;
+            padding: 1rem 1rem 2rem;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .hero {
+                margin: 2rem auto;
+                padding: 2rem 2rem 4rem;
+                gap: 3rem;
+            }
         }
         .hero-content {
             flex: 1;
+            min-width: 250px;
         }
         .hero-content h1 {
-            font-size: 3.3rem;
+            font-size: clamp(1.8rem, 6vw, 3.3rem);
             line-height: 1.2;
             background: linear-gradient(to right, #ffffff, #d4af37);
             -webkit-background-clip: text;
@@ -180,61 +234,93 @@
             margin-bottom: 1rem;
         }
         .hero-content p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            margin-bottom: 1.5rem;
             color: #e0e0e0;
             max-width: 550px;
         }
+        @media (min-width: 768px) {
+            .hero-content p {
+                margin-bottom: 2rem;
+            }
+        }
         .hero-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
         }
         .hero-image {
             flex: 1;
             display: flex;
             justify-content: center;
+            min-width: 250px;
         }
         .hero-image img {
             width: 100%;
             max-width: 500px;
-            border-radius: 48px;
+            height: auto;
+            border-radius: 32px;
             box-shadow: 0 25px 45px -12px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.3);
             transition: transform 0.4s;
+        }
+        @media (max-width: 768px) {
+            .hero-image img {
+                border-radius: 24px;
+            }
         }
         .hero-image img:hover {
             transform: scale(1.02);
         }
 
         .products-section, .about-section, .hours-section, .contact-section, .reviews-section {
-            padding: 5rem 2rem;
+            padding: 3rem 1rem;
             max-width: 1300px;
             margin: 0 auto;
         }
+        @media (min-width: 768px) {
+            .products-section, .about-section, .hours-section, .contact-section, .reviews-section {
+                padding: 5rem 2rem;
+            }
+        }
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
             margin-top: 2rem;
+        }
+        @media (min-width: 768px) {
+            .products-grid {
+                gap: 2rem;
+            }
         }
         .product-card {
             background: #141414;
-            border-radius: 30px;
+            border-radius: 24px;
             overflow: hidden;
             transition: all 0.3s ease;
             border: 1px solid rgba(212,175,55,0.2);
             backdrop-filter: blur(2px);
         }
+        @media (min-width: 768px) {
+            .product-card {
+                border-radius: 30px;
+            }
+        }
         .product-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: #d4af37;
             box-shadow: 0 20px 30px -15px rgba(0,0,0,0.6);
         }
         .product-img {
             width: 100%;
-            height: 280px;
+            height: 250px;
             object-fit: cover;
             transition: transform 0.5s ease;
+        }
+        @media (min-width: 768px) {
+            .product-img {
+                height: 280px;
+            }
         }
         .product-card:hover .product-img {
             transform: scale(1.05);
@@ -243,10 +329,15 @@
             overflow: hidden;
         }
         .product-info {
-            padding: 1.5rem;
+            padding: 1rem;
+        }
+        @media (min-width: 768px) {
+            .product-info {
+                padding: 1.5rem;
+            }
         }
         .product-name {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
@@ -255,26 +346,38 @@
             background: rgba(212, 175, 55, 0.15);
             border: 1px solid rgba(212, 175, 55, 0.4);
             border-radius: 40px;
-            padding: 0.4rem 1rem;
-            font-size: 0.85rem;
+            padding: 0.3rem 0.8rem;
+            font-size: clamp(0.75rem, 3vw, 0.85rem);
             font-weight: 500;
             color: #d4af37;
-            margin: 0.8rem 0;
+            margin: 0.6rem 0;
             letter-spacing: 0.5px;
             backdrop-filter: blur(4px);
         }
+        @media (min-width: 768px) {
+            .price-request {
+                padding: 0.4rem 1rem;
+                margin: 0.8rem 0;
+            }
+        }
         .buy-btn {
             width: 100%;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
             background: #d4af37;
             border: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 40px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+        }
+        @media (min-width: 768px) {
+            .buy-btn {
+                margin-top: 1rem;
+                padding: 12px;
+            }
         }
         .buy-btn:hover {
             background: #b8932c;
@@ -283,26 +386,37 @@
 
         .reviews-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
             margin-top: 2rem;
+        }
+        @media (min-width: 768px) {
+            .reviews-grid {
+                gap: 2rem;
+            }
         }
         .review-card {
             background: #141414;
-            border-radius: 28px;
-            padding: 1.8rem;
+            border-radius: 24px;
+            padding: 1.2rem;
             transition: all 0.3s ease;
             border: 1px solid rgba(212,175,55,0.2);
             backdrop-filter: blur(4px);
             text-align: center;
         }
+        @media (min-width: 768px) {
+            .review-card {
+                border-radius: 28px;
+                padding: 1.8rem;
+            }
+        }
         .review-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             border-color: #d4af37;
             box-shadow: 0 20px 30px -12px rgba(212,175,55,0.15);
         }
         .reviewer-name {
-            font-size: 1.4rem;
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
             font-weight: 600;
             color: #d4af37;
             margin-bottom: 0.5rem;
@@ -310,95 +424,152 @@
         .review-stars {
             display: flex;
             justify-content: center;
-            gap: 6px;
-            margin: 0.8rem 0;
+            gap: 4px;
+            margin: 0.6rem 0;
+        }
+        @media (min-width: 768px) {
+            .review-stars {
+                gap: 6px;
+                margin: 0.8rem 0;
+            }
         }
         .star {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 4vw, 1.3rem);
             color: #d4af37;
         }
         .star.empty {
             color: #3a3a3a;
         }
         .review-text {
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
             line-height: 1.5;
             color: #e0e0e0;
             font-style: italic;
-            margin-top: 0.8rem;
+            margin-top: 0.6rem;
+        }
+        @media (min-width: 768px) {
+            .review-text {
+                margin-top: 0.8rem;
+            }
         }
         .review-quote {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #d4af37;
             opacity: 0.4;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+        @media (min-width: 768px) {
+            .review-quote {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
         }
 
         .about-card, .hours-container {
             background: #141414;
-            border-radius: 32px;
-            padding: 2rem;
-            border-left: 5px solid #d4af37;
+            border-radius: 24px;
+            padding: 1.5rem;
+            border-left: 4px solid #d4af37;
             transition: all 0.3s;
+        }
+        @media (min-width: 768px) {
+            .about-card, .hours-container {
+                border-radius: 32px;
+                padding: 2rem;
+                border-left: 5px solid #d4af37;
+            }
+        }
+        .about-card p {
+            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            line-height: 1.6;
         }
         .hours-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1rem;
             justify-content: center;
             margin-top: 1rem;
+        }
+        @media (min-width: 768px) {
+            .hours-grid {
+                gap: 2rem;
+            }
         }
         .hour-item {
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(4px);
             border: 1px solid #d4af37;
-            border-radius: 28px;
-            padding: 1.5rem;
-            min-width: 200px;
+            border-radius: 20px;
+            padding: 1rem;
+            min-width: 160px;
             text-align: center;
+            flex: 1;
+        }
+        @media (min-width: 768px) {
+            .hour-item {
+                border-radius: 28px;
+                padding: 1.5rem;
+                min-width: 200px;
+            }
         }
         .hour-day {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 4vw, 1.3rem);
             font-weight: 600;
             color: #d4af37;
+        }
+        .hour-item p {
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
         }
 
         .contact-flex {
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.5rem;
             justify-content: space-between;
             background: #141414;
-            border-radius: 40px;
-            padding: 2.5rem;
+            border-radius: 24px;
+            padding: 1.5rem;
             margin-top: 1rem;
+        }
+        @media (min-width: 768px) {
+            .contact-flex {
+                border-radius: 40px;
+                padding: 2.5rem;
+                gap: 2rem;
+            }
         }
         .contact-info {
             flex: 1;
+            min-width: 240px;
         }
         .contact-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
+        }
+        @media (min-width: 768px) {
+            .contact-buttons {
+                margin: 1.5rem 0;
+            }
         }
         .footer {
             background: #0a0a0a;
             border-top: 1px solid #d4af37;
             text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
+            padding: 1.5rem;
+            font-size: clamp(0.7rem, 3vw, 0.9rem);
             letter-spacing: 1px;
         }
 
         .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 16px;
+            right: 16px;
             z-index: 1000;
             background-color: #25D366;
-            width: 60px;
-            height: 60px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -407,6 +578,14 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
             animation: pulseGlow 2s infinite;
+        }
+        @media (min-width: 768px) {
+            .whatsapp-float {
+                bottom: 30px;
+                right: 30px;
+                width: 60px;
+                height: 60px;
+            }
         }
         .whatsapp-float:hover {
             transform: scale(1.12);
@@ -427,86 +606,137 @@
             100% { transform: scale(1); opacity: 1; }
         }
         .whatsapp-float svg {
-            width: 34px;
-            height: 34px;
+            width: 24px;
+            height: 24px;
             fill: white;
         }
-        .whatsapp-tooltip {
-            position: absolute;
-            right: 75px;
-            background: #141414;
-            color: #d4af37;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            border: 1px solid #d4af37;
-            pointer-events: none;
-            backdrop-filter: blur(8px);
+        @media (min-width: 768px) {
+            .whatsapp-float svg {
+                width: 34px;
+                height: 34px;
+            }
         }
-        .whatsapp-float:hover .whatsapp-tooltip {
-            opacity: 1;
-            visibility: visible;
-            right: 80px;
+        .whatsapp-tooltip {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .whatsapp-tooltip {
+                display: block;
+                position: absolute;
+                right: 75px;
+                background: #141414;
+                color: #d4af37;
+                padding: 8px 18px;
+                border-radius: 40px;
+                font-size: 0.8rem;
+                font-weight: 500;
+                white-space: nowrap;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+                border: 1px solid #d4af37;
+                pointer-events: none;
+                backdrop-filter: blur(8px);
+            }
+            .whatsapp-float:hover .whatsapp-tooltip {
+                opacity: 1;
+                visibility: visible;
+                right: 80px;
+            }
         }
 
         .tiktok-placeholder, .instagram-placeholder {
             background: rgba(212,175,55,0.1);
-            padding: 8px 16px;
-            border-radius: 30px;
+            padding: 6px 12px;
+            border-radius: 20px;
             display: inline-block;
             border: 1px solid rgba(212,175,55,0.3);
             font-weight: 500;
+            font-size: clamp(0.8rem, 3.5vw, 0.9rem);
+            word-break: break-all;
+        }
+        @media (min-width: 768px) {
+            .tiktok-placeholder, .instagram-placeholder {
+                padding: 8px 16px;
+                border-radius: 30px;
+            }
         }
 
-        @media (max-width: 900px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background: #0d0d0d;
-                padding: 1rem 0;
-                border-radius: 20px;
-                margin-top: 1rem;
-                gap: 1rem;
-                text-align: center;
-            }
-            .nav-links.active { display: flex; }
-            .menu-icon { display: block; }
-            .hero { flex-direction: column; text-align: center; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-buttons { justify-content: center; }
-            h2 { font-size: 2rem; }
-            .contact-flex { flex-direction: column; }
-            .whatsapp-float { width: 52px; height: 52px; bottom: 20px; right: 20px; }
-            .whatsapp-float svg { width: 28px; height: 28px; }
-            .whatsapp-tooltip { display: none; }
-        }
         @media (max-width: 480px) {
-            .navbar { padding: 0.8rem 1rem; }
-            .brand { font-size: 1.3rem; }
-            .hero-content h1 { font-size: 2rem; }
-            .whatsapp-float { width: 48px; height: 48px; bottom: 16px; right: 16px; }
-            .whatsapp-float svg { width: 26px; height: 26px; }
+            .brand {
+                font-size: 1.1rem;
+            }
+            .hero-content h1 {
+                font-size: 1.6rem;
+            }
+            .btn-gold, .btn-outline-gold {
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
         }
+
         .contact-detail {
-            margin: 1rem 0;
+            margin: 0.8rem 0;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
         }
-        button { font-family: inherit; }
+        @media (min-width: 768px) {
+            .contact-detail {
+                margin: 1rem 0;
+                gap: 12px;
+            }
+        }
+        button {
+            font-family: inherit;
+        }
         .dynamic-note {
-            font-size: 0.85rem;
+            font-size: clamp(0.7rem, 3vw, 0.85rem);
             color: #d4af37;
             text-align: center;
-            margin-top: 0.5rem;
+            margin-top: 1rem;
             opacity: 0.8;
+            padding: 0 0.5rem;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .section-center p {
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+            padding: 0 1rem;
+        }
+        
+        .contact-info h3 {
+            font-size: clamp(1.2rem, 4.5vw, 1.5rem);
+        }
+        
+        .contact-info p {
+            font-size: clamp(0.8rem, 3.5vw, 0.9rem);
+        }
+        
+        .hero-buttons {
+            justify-content: flex-start;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-content {
+                text-align: center;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
     </style>
 </head>
@@ -514,13 +744,13 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="brand">TOVIA'S LUXE HAIRS</div>
-            <div class="menu-icon" id="menuIcon">✧</div>
+            <div class="menu-icon" id="menuIcon">☰</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#products" class="nav-link">Products</a></li>
                 <li><a href="#reviews" class="nav-link">Reviews</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#hours" class="nav-link">Working Hours</a></li>
+                <li><a href="#hours" class="nav-link">Hours</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </div>
@@ -538,7 +768,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="tovia-homepage.jpg" alt="Luxury hair model">
+                    <img src="tovia-homepage.jpg" alt="Luxury hair model" loading="lazy">
                 </div>
             </div>
         </section>
@@ -546,7 +776,7 @@
         <section id="products" class="products-section">
             <div class="section-center">
                 <h2>Signature Collection</h2>
-                <p style="margin-bottom: 2rem;">Bespoke luxury — pricing available upon request</p>
+                <p>Bespoke luxury — pricing available upon request</p>
             </div>
             <div class="products-grid" id="productsGrid"></div>
             <div class="dynamic-note">✦ Prices vary by length, density & customization — inquire for exact pricing ✦</div>
@@ -555,7 +785,7 @@
         <section id="reviews" class="reviews-section">
             <div class="section-center">
                 <h2>Loved By Our Royal Clients</h2>
-                <p style="margin-bottom: 1rem;">Real reviews from real queens</p>
+                <p>Real reviews from real queens</p>
             </div>
             <div class="reviews-grid" id="reviewsGrid"></div>
         </section>
@@ -563,19 +793,19 @@
         <section id="about" class="about-section">
             <div class="about-card glass-card">
                 <h2 style="margin-bottom: 1rem;">Our Legacy of Luxury</h2>
-                <p style="font-size: 1.1rem; line-height: 1.6;">TOVIA'S LUXE HAIRS was born from the desire to empower women with premium, ethically sourced human hair and couture wigs. Every strand is selected to embody confidence, grace, and sophistication. We believe that luxury isn't just a look — it's a feeling. From red carpet glamour to everyday royalty, our collections are designed for the modern queen who demands nothing but the best. Experience the fusion of craftsmanship and opulence with TOVIA'S.</p>
+                <p>TOVIA'S LUXE HAIRS was born from the desire to empower women with premium, ethically sourced human hair and couture wigs. Every strand is selected to embody confidence, grace, and sophistication. We believe that luxury isn't just a look — it's a feeling. From red carpet glamour to everyday royalty, our collections are designed for the modern queen who demands nothing but the best. Experience the fusion of craftsmanship and opulence with TOVIA'S.</p>
             </div>
         </section>
 
         <section id="hours" class="hours-section">
             <div class="section-center">
                 <h2>Opening Hours</h2>
-                <p style="margin-bottom: 2rem;">Visit our flagship or contact us</p>
+                <p>Visit our flagship or contact us</p>
             </div>
             <div class="hours-grid">
-                <div class="hour-item"><div class="hour-day">Mon – Fri</div>8:00 AM – 7:00 PM</div>
-                <div class="hour-item"><div class="hour-day">Saturday</div>9:00 AM – 6:00 PM</div>
-                <div class="hour-item"><div class="hour-day">Sunday</div>Closed ✧</div>
+                <div class="hour-item"><div class="hour-day">Mon – Fri</div><p>8:00 AM – 7:00 PM</p></div>
+                <div class="hour-item"><div class="hour-day">Saturday</div><p>9:00 AM – 6:00 PM</p></div>
+                <div class="hour-item"><div class="hour-day">Sunday</div><p>Closed ✧</p></div>
             </div>
         </section>
 
@@ -599,13 +829,13 @@
                     <div class="contact-detail">
                         <span style="font-weight: bold;">📸 Instagram:</span> <span class="instagram-placeholder">@toviasluxehairs</span>
                     </div>
-                    <p style="margin-top: 1rem; font-size: 0.9rem;">✨ WhatsApp & email support 24/7 — Get your custom quote today.</p>
+                    <p style="margin-top: 1rem;">✨ WhatsApp & email support 24/7 — Get your custom quote today.</p>
                 </div>
-                <div style="flex:1; text-align:center; background: rgba(212,175,55,0.05); border-radius: 32px; padding: 1.5rem;">
+                <div style="flex:1; text-align:center; background: rgba(212,175,55,0.05); border-radius: 24px; padding: 1rem;">
                     <p style="font-style: italic;">"Quality you can feel, luxury you can see."</p>
                     <div style="height: 2px; background: #d4af37; width: 60px; margin: 1rem auto;"></div>
                     <p>📍 Online marketplace — worldwide shipping</p>
-                    <p style="margin-top: 1rem; font-size: 0.85rem;">✧ Prices are dynamic based on length & grade — contact us for a quote ✧</p>
+                    <p style="margin-top: 1rem;">✧ Prices are dynamic based on length & grade — contact us for a quote ✧</p>
                 </div>
             </div>
         </section>
@@ -623,15 +853,13 @@
     </div>
 
     <script>
-        // Product Data — NO FIXED PRICE (luxury dynamic pricing)
         const products = [
-            { id: 1, name: "Bone Straight Wig", img: "tovia-bonestrait.jpg?text=Bone+Straight", fullName: "Bone Straight Wig" },
-            { id: 2, name: "Deep Wave Hair", img: "tovia-deepwave.jpg?text=Deep+Wave", fullName: "Deep Wave Hair" },
-            { id: 3, name: "Curly Frontal Wig", img: "tovia-viet.jpg?text=Curly+Frontal", fullName: "Curly Frontal Wig" },
-            { id: 4, name: "Raw Vietnamese Hair", img: "tovia-curlyfronter.jpg?text=Vietnamese+Hair", fullName: "Raw Vietnamese Hair" }
+            { id: 1, name: "Bone Straight Wig", img: "tovia-bonestrait.jpg", fullName: "Bone Straight Wig" },
+            { id: 2, name: "Deep Wave Hair", img: "tovia-deepwave.jpg", fullName: "Deep Wave Hair" },
+            { id: 3, name: "Curly Frontal Wig", img: "tovia-viet.jpg", fullName: "Curly Frontal Wig" },
+            { id: 4, name: "Raw Vietnamese Hair", img: "tovia-curlyfronter.jpg", fullName: "Raw Vietnamese Hair" }
         ];
 
-        // Reviews (unchanged)
         const reviews = [
             { name: "Gift", rating: 5, review: "Absolutely in love with my Bone Straight Wig! The texture is so soft and it looks incredibly natural. I've received endless compliments. TOVIA'S delivers pure elegance!" },
             { name: "Angel", rating: 5, review: "The Deep Wave Hair exceeded my expectations. It's bouncy, full, and feels like my real hair. Customer service was amazing and shipping was fast. Highly recommend!" },
@@ -639,7 +867,6 @@
             { name: "Elo", rating: 5, review: "Raw Vietnamese Hair is pure perfection! So silky, no shedding, and installed like a dream. I've found my go-to luxury hair brand. Thank you TOVIA'S!" }
         ];
 
-        // WhatsApp inquiry (price request version)
         function sendPriceRequest(productName) {
             const phone = "2348102711577";
             const message = `Hello TOVIA'S LUXE HAIRS, I'm interested in ${productName}. Please let me know the current price based on length and availability. Is this available for pickup or delivery to __________ ?`;
@@ -647,7 +874,6 @@
             window.open(url, '_blank');
         }
 
-        // General inquiry for WhatsApp (no product specific)
         function sendGeneralWhatsApp() {
             const phone = "2348102711577";
             const msg = "Hello TOVIA'S LUXE HAIRS, I want to make an inquiry about your luxury hair collections and pricing.";
@@ -666,7 +892,7 @@
             productsGrid.innerHTML = products.map(product => `
                 <div class="product-card">
                     <div class="img-wrapper">
-                        <img class="product-img" src="${product.img}" alt="${product.name}">
+                        <img class="product-img" src="${product.img}" alt="${product.name}" loading="lazy">
                     </div>
                     <div class="product-info">
                         <div class="product-name">${product.name}</div>
@@ -706,7 +932,6 @@
         renderProducts();
         renderReviews();
 
-        // Event listeners
         const heroShopBtn = document.getElementById('heroShopBtn');
         const heroWhatsappBtn = document.getElementById('heroWhatsappBtn');
         const contactWhatsappBtn = document.getElementById('contactWhatsappBtn');
@@ -719,7 +944,6 @@
         if(emailInquiry) emailInquiry.addEventListener('click', sendEmailInquiry);
         if(floatingWhatsApp) floatingWhatsApp.addEventListener('click', sendGeneralWhatsApp);
 
-        // Navbar and active link logic
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = ['home', 'products', 'reviews', 'about', 'hours', 'contact'];
         function setActiveLink() {
